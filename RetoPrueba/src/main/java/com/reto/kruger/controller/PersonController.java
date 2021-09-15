@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.reto.kruger.entity.ErrorObject;
+import com.reto.kruger.entity.Reponses;
 import com.reto.kruger.entity.Usuarios;
 import com.reto.kruger.interfaces.RetoRepository;
 
@@ -64,8 +65,12 @@ public class PersonController {
 			 
 		try {
 			
-			Usuarios persona = retoRepository.save(person);
-			return new ResponseEntity<>(persona, HttpStatus.CREATED);
+			
+			retoRepository.save(person);
+			Reponses repon = new Reponses();
+			repon.setCodigo("201");
+			repon.setMensaje("EXITO");
+			return new ResponseEntity<>(repon, HttpStatus.CREATED);
 		} catch (Exception e) {
 			
 			ErrorObject error = new ErrorObject();
